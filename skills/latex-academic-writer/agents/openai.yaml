@@ -1,7 +1,7 @@
 interface:
   display_name: "LaTeX Academic Writer"
-  short_description: "Help with LaTeX Academic Writer tasks"
-  default_prompt: "Use $latex-academic-writer to handle this LaTeX academic writing or citation workflow task."
+  short_description: "Fix LaTeX thesis structure, math, floats, and bibliography."
+  default_prompt: "Use $latex-academic-writer to inspect this LaTeX thesis issue and suggest minimal, build-safe fixes."
 
 policy:
   allow_implicit_invocation: true

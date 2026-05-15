@@ -1,39 +1,39 @@
 ---
 name: zotero-reference-manager
-description: 用於 Zotero 與 Better BibTeX 文獻工作流。當任務需要整理 citation key、同步 `references.bib`、管理 metadata 或維持引用來源一致性時使用。
+description: 用於 Zotero 與 Better BibTeX 文獻工作流。當任務需要整理 citation key、同步 `references.bib`、檢查 bibliographic metadata、設計 auto-export 流程，或維持 LaTeX/Markdown/Quarto 引用來源一致性時使用；若問題是 claim 是否被文獻支撐，改用 thesis-citation-logic-auditor。
 ---
 
-# Zotero Reference Manager (文獻管理專家)
+# Zotero Reference Manager
 
-作為 Zotero 專家，你管理知識的來源。你確保每一筆引用都精確無誤，並自動化 BibTeX 的同步流程。
+管理 citation source of truth，讓 Zotero、Better BibTeX、`.bib` 與論文稿件使用同一套可追蹤的引用資料。
 
-## 核心職責 (Core Responsibilities)
+## 標準流程
 
-1. **資料庫管理**:
-    - 使用瀏覽器插件 (Zotero Connector) 快速抓取論文 Metadata 與 PDF。
-    - 建立 Collections 與 Tags 進行分類管理。
+1. 先確認使用者的寫作目標：LaTeX、Markdown、Quarto、Word 或 Google Docs。
+2. 檢查目前 source of truth 是 Zotero library、Better BibTeX auto-export，還是手動維護的 `.bib`。
+3. 檢查 citation key 規則是否穩定，避免改名後破壞既有稿件引用。
+4. 對 metadata 做最小必要修正建議：作者、年份、標題大小寫、期刊/會議名稱、DOI、URL、arXiv id。
+5. 若使用 auto-export，確認輸出位置、格式、排序與檔名是否和 repo 中的引用設定一致。
 
-2. **Better BibTeX (BBT)**:
-    - 配置 **Citation Key Format** (如 `auth.lower + year + shorttitle.lower`) 確保 Key 的一致性。
-    - 設定 **Auto-export**：當 Zotero 內的論文新增或修改時，自動更新專案目錄下的 `references.bib`。
+## 原則
 
-3. **PDF 管理**:
-    - 使用 **Zotfile** (或 Zotero 7 內建功能) 自動重新命名 PDF 檔案 (如 `Author - Year - Title.pdf`) 並移動到指定雲端目錄。
+- Zotero/Better BibTeX 應是 bibliography metadata 的主要來源；避免直接手改 auto-export 產生的 `.bib`。
+- 不要為了讓 LaTeX 先過而捏造 citation key。
+- 若必須新增 key，先確認 metadata 與實際文獻主張，再同步到稿件。
+- key pattern 應穩定、可讀、低衝突；不要在論文後期任意重命名大量 keys。
 
-4. **寫作整合**:
-    - 在 Word/Google Docs 中使用 Plugin 插入引用。
-- 在 Markdown/LaTeX/Quarto 中使用 Citation Key (`@einstein1905`) 配合 Pandoc。
+## 何時改用其他 skill
 
-## 指導原則 (Guidelines)
+- 文獻是否真的支撐某句 claim：改用 `thesis-citation-logic-auditor`
+- LaTeX citation command、bibliography style 或 build error：改用 `latex-academic-writer` 或 `thesis-build-guard`
+- 草稿段落要落成正式 thesis prose：改用 `thesis-draft-to-latex`
 
-- **Source of Truth**: Zotero 是唯一的真理來源。不要手動修改 `.bib` 檔案，因為下次同步就會被覆蓋。如果是格式錯誤，去 Zotero 修改 Metadata。
-- **Clean Metadata**: 抓取論文後，務必檢查 Metadata (作者大小寫、期刊名稱) 是否正確。
+## 範例 key pattern
 
-## 範例：Better BibTeX Citation Key Pattern
+常見 Better BibTeX pattern：
 
-Pattern: `[auth:lower][year][shorttitle:lower]`
+```text
+[auth:lower][year][shorttitle:lower]
+```
 
-Examples:
-
-- Einstein, 1905, "On the Electrodynamics of Moving Bodies" -> `einstein1905electrodynamics`
-- Turing, 1950, "Computing Machinery and Intelligence" -> `turing1950computing`
+使用前先確認是否會和既有 keys 衝突；若 repo 已經有固定 key style，以既有 style 為準。

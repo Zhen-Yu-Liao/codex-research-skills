@@ -65,7 +65,7 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-s
 
 ## 怎麼選 Skill
 
-使用時優先直接點名 skill，例如 `Use $subagent-prompt-longrun ...` 或 `請用 thesis-argument-planner ...`。如果任務跨多個階段，先用規劃或審查型 skill，確認方向後再進入成稿或驗證。
+使用時優先直接點名 skill，例如「請用 `subagent-prompt-longrun` ...」或「請用 `thesis-argument-planner` ...」。如果任務跨多個階段，先用規劃或審查型 skill，確認方向後再進入成稿或驗證。
 
 ### Subagent Workflow Skills
 
@@ -77,6 +77,16 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-s
 | `subagent-prompt-handoff` | 交付前審查 prompt 產生器 | 功能大致完成，需要最後 review、測試、文件同步與風險掃描 | 已完成的 branch、README、tests、`.env.example`、release checklist | 一份 release-readiness review / verification prompt |
 
 Subagent workflow 的核心模式是兩段式：先用本 repo 的 skill 產生高品質 prompt，再把該 prompt 貼回 Codex 執行。這些 skills 本身不直接替你開發功能，而是約束下一輪 Codex/subagents 如何工作。
+
+使用時可以這樣指定目的：
+
+```text
+請用 subagent-prompt-longrun 先掃描這個 repo、Spec.md、測試指令和可用 skills，產生一份可直接貼給 Codex 的長任務 subagent prompt。請把工作切成不重疊的 bounded jobs，並要求每個 subagent 回報 changed files、commands run、tests run 和 open risks。
+```
+
+```text
+請用 subagent-prompt-debug 根據這個錯誤訊息和失敗指令產生除錯 prompt。重點是先重現問題、確認 root cause、做最小修復，最後要求回歸測試證據；不要讓下一輪 agent 順手做大重構。
+```
 
 ### Thesis Core Skills
 
@@ -90,6 +100,35 @@ Subagent workflow 的核心模式是兩段式：先用本 repo 的 skill 產生�
 
 `thesis-shared-references` 不是 triggerable skill。不要直接要求 Codex「使用 thesis-shared-references」完成任務；它的功能是提供其他 thesis skills 的共同規範。
 
+### 寫作風格放在哪裡
+
+論文寫作風格主要放在：
+
+- `skills/thesis-shared-references/thesis_base_conventions.md`
+
+這份檔案定義跨 thesis 共用的寫作與編修規則，例如：
+
+- 先讀現有稿件，再補寫內容。
+- 不捏造 citation key、文獻結論、數值結果或定理條件。
+- 新符號第一次出現時要說明它在當前段落中的角色。
+- 對讀者可能卡住的符號切換或估計對象切換，優先補短 prose bridge。
+- 避免生硬直譯、過度抽象術語、模板化 AI prose 和沒有來源支撐的新名詞。
+
+以下 thesis skills 會在「讀取順序」中讀取它：
+
+- `thesis-argument-planner`
+- `thesis-build-guard`
+- `thesis-citation-logic-auditor`
+- `thesis-draft-to-latex`
+
+如果 `thesis-shared-references` 沒有安裝，這些 skills 仍可使用本身的通用規則執行，但會少掉共享寫作風格與一致性約束。因此安裝 `thesis-core` 時建議一定包含 `skills/thesis-shared-references`。
+
+領域層規範放在：
+
+- `skills/thesis-shared-references/statistics_thesis_conventions.md`
+
+這份檔案不是所有 thesis 任務的預設規範；只有當論文明確涉及 statistics、methodology 或 math-heavy empirical thesis 時，相關 thesis skills 才會讀它。
+
 ### LaTeX Thesis Support Skills
 
 | Skill | 角色 | 何時使用 | 典型輸入 | 產出 |
@@ -99,6 +138,16 @@ Subagent workflow 的核心模式是兩段式：先用本 repo 的 skill 產生�
 
 這兩個 skills 適合 LaTeX thesis 的支援任務；若問題是章節論證或 citation 是否支撐 claim，優先使用 `thesis-argument-planner` 或 `thesis-citation-logic-auditor`。
 
+使用時可以這樣指定目的：
+
+```text
+請用 latex-academic-writer 檢查這段 LaTeX 表格與 caption 寫法，目標是讓它符合 thesis 排版慣例並能穩定編譯。請不要改動章節論證，只處理 LaTeX 結構。
+```
+
+```text
+請用 zotero-reference-manager 幫我規劃 Zotero / Better BibTeX 到 references.bib 的同步方式，重點是 citation key 穩定、metadata 乾淨，且不要破壞既有稿件引用。
+```
+
 ## 常見工作流
 
 ### 1. 讓 Codex 長時間完成一個專案任務
@@ -106,7 +155,7 @@ Subagent workflow 的核心模式是兩段式：先用本 repo 的 skill 產生�
 1. 在 repo 中準備 `Spec.md`、驗收標準、目前限制。
 2. 啟動：
    ```text
-   Use $subagent-prompt-longrun to scan this repo, Spec.md, tests, build scripts, and available skills, then draft a long-run subagent development prompt.
+   請用 subagent-prompt-longrun 掃描這個 repo、Spec.md、測試指令、build scripts 和可用 skills，產生一份可直接貼給 Codex 的長任務 subagent prompt。
    ```
 3. 把產出的 prompt 貼回 Codex 執行。
 4. 完成後再用 `subagent-prompt-handoff` 產生交付前審查 prompt。
@@ -114,7 +163,7 @@ Subagent workflow 的核心模式是兩段式：先用本 repo 的 skill 產生�
 ### 2. 只想先規劃，不要改檔
 
 ```text
-Use $subagent-prompt-planning to scan this repo and draft a planning-only prompt. The output should be decision-complete and must not ask the next agent to implement.
+請用 subagent-prompt-planning 掃描這個 repo，產生一份只做規劃、不做實作的 prompt。輸出要 decision-complete，讓下一輪 agent 不需要再做高層決策。
 ```
 
 適合需求還不穩、想先拆 ownership、API、測試策略或風險時使用。
@@ -122,7 +171,7 @@ Use $subagent-prompt-planning to scan this repo and draft a planning-only prompt
 ### 3. 有錯誤要修，但不想讓 Codex 亂 patch
 
 ```text
-Use $subagent-prompt-debug to inspect this failure command and error log, then draft a root-cause-first debug prompt with minimal-diff repair and regression verification.
+請用 subagent-prompt-debug 根據這個失敗指令和錯誤 log 產生除錯 prompt。請要求下一輪 agent 先重現問題，再找 root cause，最後用最小修復與回歸驗證收斂。
 ```
 
 提供的材料越具體越好：失敗命令、錯誤訊息、CI log、最近修改檔案、可重現步驟。
@@ -156,7 +205,7 @@ Use $subagent-prompt-debug to inspect this failure command and error log, then d
 ## 使用範例
 
 ```text
-Use $subagent-prompt-longrun to scan this repo and draft a long-run subagent development prompt.
+請用 subagent-prompt-longrun 先掃描目前 repo 和可用 skills，產生一份長任務 subagent prompt，讓下一輪 Codex 可以完成開發、整合、測試與交付前檢查。
 ```
 
 ```text
@@ -165,6 +214,18 @@ Use $subagent-prompt-longrun to scan this repo and draft a long-run subagent dev
 
 ```text
 請用 thesis-citation-logic-auditor 檢查這一節的 claim 是否真的被 citation 支撐。
+```
+
+```text
+請用 thesis-draft-to-latex 把這份草稿轉成正式 thesis 段落，沿用現有 `.tex` 章節風格，不要新增未確認的 citation key。
+```
+
+```text
+請用 thesis-build-guard 檢查這次修改後的 thesis 是否能可靠編譯，並確認章節掛載、citation、reference、圖表路徑和 build artifact 都一致。
+```
+
+```text
+請用 zotero-reference-manager 檢查目前 citation key 規則和 `references.bib` 同步流程，避免 Zotero auto-export 破壞既有稿件引用。
 ```
 
 ## 驗證

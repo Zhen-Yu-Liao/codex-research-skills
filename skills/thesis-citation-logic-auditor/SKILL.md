@@ -9,7 +9,7 @@ description: 審查論文章節中的 claim、證據與 citation 是否對齊，
 
 ## 讀取順序
 
-1. 讀 `../thesis-shared-references/thesis_base_conventions.md`
+1. 若存在，讀 `../thesis-shared-references/thesis_base_conventions.md`；若缺少，使用本 skill 的通用 citation/logic audit 規則並在回覆中標記 shared references 未安裝
 2. 若使用者的論文明確屬於 statistics、methodology 或 math-heavy empirical thesis，讀 `../thesis-shared-references/statistics_thesis_conventions.md`
 3. 讀 `references/audit_checklist.md`
 4. 若 workspace 存在 `.agent/references/thesis_project_conventions.md`，讀它並覆寫前述慣例

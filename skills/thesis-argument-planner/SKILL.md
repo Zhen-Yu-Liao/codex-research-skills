@@ -9,7 +9,7 @@ description: 用於 thesis 論證規劃。當使用者要求整理 chapter outli
 
 ## 讀取順序
 
-1. 讀 `../thesis-shared-references/thesis_base_conventions.md`
+1. 若存在，讀 `../thesis-shared-references/thesis_base_conventions.md`；若缺少，使用本 skill 的通用 thesis 規則並在回覆中標記 shared references 未安裝
 2. 若使用者的論文明確屬於 statistics、methodology 或 math-heavy empirical thesis，讀 `../thesis-shared-references/statistics_thesis_conventions.md`
 3. 若 workspace 存在 `.agent/references/thesis_project_conventions.md`，讀它並覆寫前述慣例
 4. 讀目標章節、相鄰章節、entry file、style/preamble、相關草稿與 bibliography
