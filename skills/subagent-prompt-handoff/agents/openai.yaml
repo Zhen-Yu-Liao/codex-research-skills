@@ -1,0 +1,7 @@
+interface:
+  display_name: "Handoff Subagent Prompt"
+  short_description: "Draft a release-readiness subagent prompt from repo facts."
+  default_prompt: "Use $subagent-prompt-handoff to scan this repo and the available skills, then draft a single release-readiness subagent prompt in my language."
+
+policy:
+  allow_implicit_invocation: true

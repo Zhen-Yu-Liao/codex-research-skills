@@ -1,0 +1,7 @@
+interface:
+  display_name: "Planning Subagent Prompt"
+  short_description: "Draft a planning-only subagent prompt from repo facts."
+  default_prompt: "Use $subagent-prompt-planning to scan this repo and the available skills, then draft a single planning-only subagent prompt in my language."
+
+policy:
+  allow_implicit_invocation: true

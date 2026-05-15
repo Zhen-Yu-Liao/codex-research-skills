@@ -1,0 +1,7 @@
+interface:
+  display_name: "Thesis Argument Planner"
+  short_description: "Thesis argument planning and gap review"
+  default_prompt: "Use $thesis-argument-planner to do a structure-only thesis argument plan before any prose rewrite."
+
+policy:
+  allow_implicit_invocation: true

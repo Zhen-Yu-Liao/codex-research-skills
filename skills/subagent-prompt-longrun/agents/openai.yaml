@@ -1,0 +1,7 @@
+interface:
+  display_name: "Long-Run Subagent Prompt"
+  short_description: "Draft a one-shot long-run subagent prompt from repo facts."
+  default_prompt: "Use $subagent-prompt-longrun to scan this repo and the available skills, then draft a single long-run subagent development prompt in my language."
+
+policy:
+  allow_implicit_invocation: true

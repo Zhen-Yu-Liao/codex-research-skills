@@ -1,0 +1,4 @@
+interface:
+  display_name: "Thesis Build Guard"
+  short_description: "Guard thesis builds, logs, and LaTeX structure."
+  default_prompt: "Check this thesis project for build and LaTeX integration issues."

@@ -1,0 +1,7 @@
+interface:
+  display_name: "LaTeX Academic Writer"
+  short_description: "Help with LaTeX Academic Writer tasks"
+  default_prompt: "Use $latex-academic-writer to handle this LaTeX academic writing or citation workflow task."
+
+policy:
+  allow_implicit_invocation: true

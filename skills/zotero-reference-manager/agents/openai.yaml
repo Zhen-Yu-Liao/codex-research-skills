@@ -1,0 +1,7 @@
+interface:
+  display_name: "Zotero Reference Manager"
+  short_description: "Zotero and Better BibTeX citation workflow"
+  default_prompt: "Use $zotero-reference-manager to handle this Zotero, Better BibTeX, or citation-key workflow."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+
+# Codex/local runtime noise
+.codex/
+.cache/
+__pycache__/
+*.pyc
+
+# Local validation output
+validation-results/
+*.log

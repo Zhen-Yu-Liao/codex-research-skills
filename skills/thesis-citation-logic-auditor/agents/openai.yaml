@@ -1,0 +1,4 @@
+interface:
+  display_name: "Thesis Citation Logic Auditor"
+  short_description: "Audit thesis claims, support, and citation fit."
+  default_prompt: "Audit the logic and citation support in this thesis section."
