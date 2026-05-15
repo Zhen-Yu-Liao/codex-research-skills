@@ -1,0 +1,7 @@
+interface:
+  display_name: "Thesis Shared References"
+  short_description: "Shared thesis conventions for installed thesis workflow skills."
+  default_prompt: "Use $thesis-shared-references to inspect or maintain the shared thesis conventions."
+
+policy:
+  allow_implicit_invocation: false

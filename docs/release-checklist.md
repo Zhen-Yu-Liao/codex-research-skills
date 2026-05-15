@@ -25,6 +25,7 @@ python .\scripts\validate_skill_tree.py
 - [ ] GitHub Actions `Validate skills` 通過。
 - [ ] README 的三組 install commands 都指向存在的 `skills/...` path。
 - [ ] README 的 public install commands 使用實際 repo owner/name，不含 `<owner>` placeholder。
+- [ ] 每個 README install command 都用暫存 `--dest` 實測成功，包含 `thesis-shared-references`。
 
 ## Public Switch
 

@@ -44,7 +44,7 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-s
 python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo Zhen-Yu-Liao/codex-research-skills --path skills/thesis-shared-references skills/thesis-argument-planner skills/thesis-build-guard skills/thesis-citation-logic-auditor skills/thesis-draft-to-latex
 ```
 
-`thesis-shared-references` 是共享依賴資料夾，不是 triggerable skill；安裝 thesis pack 時仍必須一起安裝。
+`thesis-shared-references` 是共享 conventions support skill；安裝 thesis pack 時必須一起安裝。它主要供其他 thesis skills 讀取，不應取代 `thesis-argument-planner`、`thesis-citation-logic-auditor`、`thesis-draft-to-latex` 或 `thesis-build-guard`。
 
 ### `latex-thesis-support`
 
@@ -102,9 +102,9 @@ Subagent workflow 的核心模式是兩段式：先用本 repo 的 skill 產生�
 | `thesis-citation-logic-auditor` | claim / evidence / citation 審查 | 擔心某段話說得比 citation 支撐得更多，或要送出前做邏輯審查 | 目標段落、`.bib` 或 citation key、相關文獻摘要/原文 | findings-first 的 citation/logic 問題清單與修法 |
 | `thesis-draft-to-latex` | 草稿到正式 `.tex` | 已有草稿或規劃，想落成正式 thesis prose 與 LaTeX 結構 | 草稿、目標 `.tex`、既有章節 style、citation key | 可放入正式章節的 LaTeX prose、公式、引用與缺口說明 |
 | `thesis-build-guard` | LaTeX thesis build 與 wiring 驗證 | 修改 `.tex`、`.bib`、圖表、preamble 後，需要確認能編譯且掛載正確 | entry file、`latexmkrc`、build log、修改檔案 | blocking / high-risk / warning 分級 findings 與最小修法 |
-| `thesis-shared-references` | 共享 thesis conventions | 安裝 `thesis-core` 時一起安裝，供其他 thesis skills 讀取 | 不直接觸發 | 通用 thesis 寫作規則；statistics convention 只在相關任務中選讀 |
+| `thesis-shared-references` | 共享 thesis conventions support skill | 安裝 `thesis-core` 時一起安裝，供其他 thesis skills 讀取 | 通常不直接使用；只有維護或解釋共享 conventions 時才點名 | 通用 thesis 寫作規則；statistics convention 只在相關任務中選讀 |
 
-`thesis-shared-references` 不是 triggerable skill。不要直接要求 Codex「使用 thesis-shared-references」完成任務；它的功能是提供其他 thesis skills 的共同規範。
+不要直接要求 Codex「使用 thesis-shared-references」來完成章節規劃、citation audit、成稿或 build 驗證；它的主要功能是提供其他 thesis skills 的共同規範。
 
 ### 寫作風格放在哪裡
 

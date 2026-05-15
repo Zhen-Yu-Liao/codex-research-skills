@@ -32,7 +32,7 @@
 
 設計邊界：
 
-- `thesis-shared-references` 是共享依賴資料夾，不是 triggerable skill。
+- `thesis-shared-references` 是共享 conventions support skill；它可被 installer 安裝，但主要供其他 thesis skills 讀取。
 - 預設讀 `thesis_base_conventions.md`。
 - `statistics_thesis_conventions.md` 是 optional domain reference；只有處理 statistics、methodology 或 math-heavy empirical thesis 時才讀。
 
