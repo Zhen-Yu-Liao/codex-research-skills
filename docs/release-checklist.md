@@ -1,6 +1,6 @@
 # Release Checklist
 
-公開前先完成這份 checklist。private review 階段也應盡量跑完，避免把個人專案脈絡帶到公開 repo。
+公開前或每次更新 release 前先完成這份 checklist，避免把個人專案脈絡帶到公開 repo。
 
 ## Sanitization
 
@@ -21,14 +21,14 @@ python .\scripts\validate_skill_tree.py
 
 ## GitHub Review
 
-- [ ] private repo 已 push。
+- [ ] repo 已 push 到 GitHub，且 `origin/main` 與本地 `HEAD` 一致。
 - [ ] GitHub Actions `Validate skills` 通過。
 - [ ] README 的三組 install commands 都指向存在的 `skills/...` path。
-- [ ] 使用 private repo 安裝時，確認使用者需要 GitHub 權限或有效 git credentials。
+- [ ] README 的 public install commands 使用實際 repo owner/name，不含 `<owner>` placeholder。
 
 ## Public Switch
 
-review 通過後再切 public：
+若 repo 仍在 private staging，review 通過後再切 public：
 
 ```powershell
 gh repo edit codex-research-skills --visibility public

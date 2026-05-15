@@ -5,7 +5,7 @@
 - 用 subagents 做長任務、規劃、除錯與交付前驗證。
 - 用 LaTeX 寫 thesis 時，協助論證規劃、citation/claim 審查、草稿落成、編譯檢查與文獻管理。
 
-目前 repo 先以 private review 狀態交付。公開前請先完成 `docs/release-checklist.md`。
+這個 repo 可直接從 GitHub 安裝。公開或更新 release 前，請先跑完 `docs/release-checklist.md`。
 
 ## Skill Packs
 
@@ -23,7 +23,7 @@
 安裝：
 
 ```powershell
-python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo <owner>/codex-research-skills --path skills/subagent-prompt-longrun skills/subagent-prompt-planning skills/subagent-prompt-debug skills/subagent-prompt-handoff
+python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo Zhen-Yu-Liao/codex-research-skills --path skills/subagent-prompt-longrun skills/subagent-prompt-planning skills/subagent-prompt-debug skills/subagent-prompt-handoff
 ```
 
 ### `thesis-core`
@@ -41,7 +41,7 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-s
 安裝：
 
 ```powershell
-python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo <owner>/codex-research-skills --path skills/thesis-shared-references skills/thesis-argument-planner skills/thesis-build-guard skills/thesis-citation-logic-auditor skills/thesis-draft-to-latex
+python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo Zhen-Yu-Liao/codex-research-skills --path skills/thesis-shared-references skills/thesis-argument-planner skills/thesis-build-guard skills/thesis-citation-logic-auditor skills/thesis-draft-to-latex
 ```
 
 `thesis-shared-references` 是共享依賴資料夾，不是 triggerable skill；安裝 thesis pack 時仍必須一起安裝。
@@ -58,10 +58,16 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-s
 安裝：
 
 ```powershell
-python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo <owner>/codex-research-skills --path skills/latex-academic-writer skills/zotero-reference-manager
+python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo Zhen-Yu-Liao/codex-research-skills --path skills/latex-academic-writer skills/zotero-reference-manager
 ```
 
 安裝後請重新啟動 Codex，讓新的 skills 被載入。
+
+macOS/Linux 使用者可將 installer path 換成：
+
+```bash
+python "$HOME/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py" --repo Zhen-Yu-Liao/codex-research-skills --path skills/subagent-prompt-longrun
+```
 
 ## 怎麼選 Skill
 
